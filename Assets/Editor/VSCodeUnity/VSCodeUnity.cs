@@ -27,6 +27,12 @@ using System.IO;
 
 public class VSCodeUnity
 {
+	private const string VS11VersionString = "Microsoft Visual Studio Solution File, Format Version 11.00";
+	private const string VS11ProductString = "# Visual Studio 2008";
+	
+	private const string VS12VersionString = "Microsoft Visual Studio Solution File, Format Version 12.00";
+	private const string VS12ProductString = "# Visual Studio 2012";
+
 	[MenuItem("VS Code/Update project for Visual Studio Code")]
 	private static void UpdateProjectForVCS()
 	{
@@ -41,8 +47,22 @@ public class VSCodeUnity
 		{
 			if( fileInfo.Extension == ".sln")
 			{
-				message += fileInfo + "\n";
 				noSolutionFilesFound = false;
+
+				StreamReader reader = new StreamReader( fileInfo.ToString());
+				string fileString = reader.ReadToEnd();
+				if( fileString.Contains( VS11VersionString) && fileString.Contains( VS11ProductString))
+				{
+					message += "\n Converting sln: " + fileInfo.Name;
+				}
+				else if( fileString.Contains( VS12VersionString) && fileString.Contains( VS12ProductString))
+				{
+					message += "\n Skipping converted sln: " + fileInfo.Name;
+				}
+				else
+				{
+					message += "\n Skipping unknown sln format: " + fileInfo.Name;
+				}
 			}
 		}
 
