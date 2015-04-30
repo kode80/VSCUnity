@@ -51,9 +51,17 @@ public class VSCodeUnity
 
 				StreamReader reader = new StreamReader( fileInfo.ToString());
 				string fileString = reader.ReadToEnd();
+				reader.Close();
+
 				if( fileString.Contains( VS11VersionString) && fileString.Contains( VS11ProductString))
 				{
 					message += "\n Converting sln: " + fileInfo.Name;
+					fileString = fileString.Replace( VS11VersionString, VS12VersionString);
+					fileString = fileString.Replace( VS11ProductString, VS12ProductString);
+
+					StreamWriter writer = new StreamWriter( fileInfo.ToString());
+					writer.Write( fileString);
+					writer.Close();
 				}
 				else if( fileString.Contains( VS12VersionString) && fileString.Contains( VS12ProductString))
 				{
