@@ -63,6 +63,13 @@ public class VSCodeUnity
 					StreamWriter writer = new StreamWriter( stream, new UTF8Encoding( true));
 					writer.Write( fileString);
 					writer.Close();
+
+					if( fileInfo.Name.Contains( "-csharp"))
+					{
+						string oldPath = fileInfo.ToString();
+						string newPath = oldPath.Replace( ".sln", ".sln.hide");
+						File.Move( oldPath, newPath);
+					}
 				}
 				else if( fileString.Contains( VS12VersionString))
 				{
