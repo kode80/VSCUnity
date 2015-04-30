@@ -24,14 +24,15 @@
 using UnityEngine;
 using UnityEditor;
 using System.IO;
+using System.Text;
 
 public class VSCodeUnity
 {
-	private const string VS11VersionString = "Microsoft Visual Studio Solution File, Format Version 11.00";
-	private const string VS11ProductString = "# Visual Studio 2008";
+	private const string VS11VersionString = "Microsoft Visual Studio Solution File, Format Version 11.00\r\n" +
+											 "# Visual Studio 2008\r\n";
 	
-	private const string VS12VersionString = "Microsoft Visual Studio Solution File, Format Version 12.00";
-	private const string VS12ProductString = "# Visual Studio 2012";
+	private const string VS12VersionString = "\r\nMicrosoft Visual Studio Solution File, Format Version 12.00\r\n" +
+											 "# Visual Studio 2012";
 
 	[MenuItem("VS Code/Update project for Visual Studio Code")]
 	private static void UpdateProjectForVCS()
@@ -53,17 +54,17 @@ public class VSCodeUnity
 				string fileString = reader.ReadToEnd();
 				reader.Close();
 
-				if( fileString.Contains( VS11VersionString) && fileString.Contains( VS11ProductString))
+				if( fileString.Contains( VS11VersionString))
 				{
 					message += "\n Converting sln: " + fileInfo.Name;
 					fileString = fileString.Replace( VS11VersionString, VS12VersionString);
-					fileString = fileString.Replace( VS11ProductString, VS12ProductString);
 
-					StreamWriter writer = new StreamWriter( fileInfo.ToString());
+					Stream stream = File.OpenWrite( fileInfo.ToString());
+					StreamWriter writer = new StreamWriter( stream, new UTF8Encoding( true));
 					writer.Write( fileString);
 					writer.Close();
 				}
-				else if( fileString.Contains( VS12VersionString) && fileString.Contains( VS12ProductString))
+				else if( fileString.Contains( VS12VersionString))
 				{
 					message += "\n Skipping converted sln: " + fileInfo.Name;
 				}
