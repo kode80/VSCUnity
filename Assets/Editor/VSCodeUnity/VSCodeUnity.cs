@@ -35,7 +35,7 @@ public class VSCodeUnity
 											 "# Visual Studio 2012";
 
 	[MenuItem("VS Code/Update project for Visual Studio Code")]
-	private static void UpdateProjectForVCS()
+	private static void UpdateProjectForVSC()
 	{
 		string message = "";
 		string path = Application.dataPath + "/..";
