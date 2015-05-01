@@ -23,9 +23,12 @@
 
 using UnityEngine;
 using UnityEditor;
+using System;
 using System.IO;
 using System.Text;
-using System;
+using System.Reflection;
+using System.Collections.Generic;
+using System.Linq;
 
 public class VSCodeUnity
 {
@@ -116,6 +119,9 @@ public class VSCodeUnity
 		else
 		{
 			message = "Found CSharpDef at: " + cSharpDefPath;
+			
+			List<string> classNames = GetPublicClassesInNamespaces( "UnityEngine", "UnityEditor");
+			Debug.Log( string.Join( ", ", classNames.ToArray()));
 		}
 		
 		EditorUtility.DisplayDialog( "Add Unity symbols", message, "Ok");
@@ -139,5 +145,28 @@ public class VSCodeUnity
 		}
 		
 		return null;
+	}
+	
+	private static List<string> GetPublicClassesInNamespaces( params string[] namespaces)
+	{
+		List<string> classNames = new List<string>();
+		Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+		IEnumerable<Type> types;
+		string currentNamespace;
+		string className;
+		
+		for( int i=0; i<namespaces.Length; i++)
+		{
+			currentNamespace = namespaces[ i];
+			types = assemblies.SelectMany(t => t.GetTypes())
+							  .Where(t => t.IsClass && t.Namespace == currentNamespace && t.IsPublic);
+			foreach( Type type in types)
+			{
+				className = type.ToString().Replace( currentNamespace + ".", "");
+				classNames.Add( className);
+			}
+		}
+		
+		return classNames;
 	}
 }
