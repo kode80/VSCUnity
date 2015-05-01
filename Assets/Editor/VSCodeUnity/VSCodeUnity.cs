@@ -119,13 +119,14 @@ public class VSCodeUnity
 		}
 		else
 		{
-			message = "Found CSharpDef at: " + cSharpDefPath;
-			
 			RestoreModifiedFileBackupIfExists( cSharpDefPath);
 			BackupFileBeforeModification( cSharpDefPath);
 			
 			List<string> classNames = GetPublicClassesInNamespaces( "UnityEngine", "UnityEditor");
-			Debug.Log( string.Join( ", ", classNames.ToArray()));
+			bool success = AddClassNamesToCSharpDef( classNames, cSharpDefPath);
+			
+			message = success ? "Successfully added Unity symbols to Visual Studio Code" :
+								"Couldn't add Unity symbols to Visual Studio Code, couldn't find keywords array";
 		}
 		
 		EditorUtility.DisplayDialog( "Add Unity symbols", message, "Ok");
@@ -189,5 +190,37 @@ public class VSCodeUnity
 	{
 		string backupPath = originalPath + ModifiedFilesBackupExtension;
 		File.Copy( originalPath, backupPath, true);
+	}
+	
+	private static bool AddClassNamesToCSharpDef( List<string> classNames, string cSharpDefPath)
+	{
+		StreamReader reader = new StreamReader( cSharpDefPath);
+		string cSharpDef = reader.ReadToEnd();
+		reader.Close();
+		
+		string keywordsArrayMarker = "keywords: [";
+		if( cSharpDef.IndexOf( keywordsArrayMarker) > -1)
+		{
+			string linePrefix = "\r\n\t\t\t";
+			string keywordString = keywordsArrayMarker + linePrefix + "//-- BEGIN UNITY SYMBOLS --//";
+			
+			foreach( string className in classNames)
+			{
+				keywordString += linePrefix + "\'" + className + "\',";
+			}
+			
+			keywordString += linePrefix + "//-- END UNITY SYMBOLS --//";
+			
+			cSharpDef = cSharpDef.Replace( keywordsArrayMarker, keywordString);
+			
+			Stream stream = File.OpenWrite( cSharpDefPath);
+			StreamWriter writer = new StreamWriter( stream, new UTF8Encoding( true));
+			writer.Write( cSharpDef);
+			writer.Close();
+			
+			return true;
+		}
+		
+		return false;
 	}
 }
