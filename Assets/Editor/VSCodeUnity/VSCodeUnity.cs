@@ -25,6 +25,7 @@ using UnityEngine;
 using UnityEditor;
 using System.IO;
 using System.Text;
+using System;
 
 public class VSCodeUnity
 {
@@ -33,6 +34,8 @@ public class VSCodeUnity
 	
 	private const string VS12VersionString = "\r\nMicrosoft Visual Studio Solution File, Format Version 12.00\r\n" +
 											 "# Visual Studio 2012";
+											 
+	private const string VSCCSharpDefPathOSX = "/Applications/Visual Studio Code.app/Contents/Resources/app/plugins/vs.language.csharp/csharpDef.js";
 
 	[MenuItem("VS Code/Update project for Visual Studio Code")]
 	private static void UpdateProjectForVSC()
@@ -94,6 +97,47 @@ public class VSCodeUnity
 	[MenuItem("VS Code/Add Unity symbol highlighting to Visual Studio Code")]
 	private static void AddUnitySymbolsToVSC()
 	{
-		EditorUtility.DisplayDialog( "Add Unity symbols", "Test", "Ok");
+		string cSharpDefPath = null;
+		string message = "";
+		
+		if( Application.platform == RuntimePlatform.OSXEditor)
+		{
+			cSharpDefPath = FindCSharpDefPathOSX();
+		}
+		else
+		{
+			message = "Adding Unity symbols to Visual Studio Code is not currently supported on " + Application.platform;
+		}
+		
+		if( cSharpDefPath == null)
+		{
+			message = "Couldn't find Visual Studio Code application or CSharpDef";
+		}
+		else
+		{
+			message = "Found CSharpDef at: " + cSharpDefPath;
+		}
+		
+		EditorUtility.DisplayDialog( "Add Unity symbols", message, "Ok");
+	}
+	
+	private static string FindCSharpDefPathOSX()
+	{
+		if( File.Exists( VSCCSharpDefPathOSX))
+		{
+			return VSCCSharpDefPathOSX;
+		}
+		else 
+		{
+			string userPath = Environment.GetFolderPath( Environment.SpecialFolder.Personal);
+			string cSharpDefUserPath = userPath + VSCCSharpDefPathOSX;
+			
+			if( File.Exists( cSharpDefUserPath))
+			{
+				return cSharpDefUserPath;
+			}
+		}
+		
+		return null;
 	}
 }
