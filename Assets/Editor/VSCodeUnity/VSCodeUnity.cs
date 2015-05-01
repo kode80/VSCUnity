@@ -163,7 +163,8 @@ public class VSCodeUnity
 		{
 			currentNamespace = namespaces[ i];
 			types = assemblies.SelectMany(t => t.GetTypes())
-							  .Where(t => t.IsClass && t.Namespace == currentNamespace && t.IsPublic);
+							  .Where(t => (t.IsClass || t.IsAnsiClass) && t.Namespace == currentNamespace && t.IsPublic);
+			
 			foreach( Type type in types)
 			{
 				className = type.ToString().Replace( currentNamespace + ".", "");
