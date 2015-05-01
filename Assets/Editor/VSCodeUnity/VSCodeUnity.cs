@@ -90,4 +90,10 @@ public class VSCodeUnity
 
 		EditorUtility.DisplayDialog( "Update project", message, "Ok");
 	}
+	
+	[MenuItem("VS Code/Add Unity symbol highlighting to Visual Studio Code")]
+	private static void AddUnitySymbolsToVSC()
+	{
+		EditorUtility.DisplayDialog( "Add Unity symbols", "Test", "Ok");
+	}
 }
