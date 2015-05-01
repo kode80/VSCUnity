@@ -39,7 +39,8 @@ public class VSCodeUnity
 											 "# Visual Studio 2012";
 											 
 	private const string VSCCSharpDefPathOSX = "/Applications/Visual Studio Code.app/Contents/Resources/app/plugins/vs.language.csharp/csharpDef.js";
-
+	private const string ModifiedFilesBackupExtension = ".VSCModifiedOriginal"; 
+	
 	[MenuItem("VS Code/Update project for Visual Studio Code")]
 	private static void UpdateProjectForVSC()
 	{
@@ -120,6 +121,9 @@ public class VSCodeUnity
 		{
 			message = "Found CSharpDef at: " + cSharpDefPath;
 			
+			RestoreModifiedFileBackupIfExists( cSharpDefPath);
+			BackupFileBeforeModification( cSharpDefPath);
+			
 			List<string> classNames = GetPublicClassesInNamespaces( "UnityEngine", "UnityEditor");
 			Debug.Log( string.Join( ", ", classNames.ToArray()));
 		}
@@ -168,5 +172,21 @@ public class VSCodeUnity
 		}
 		
 		return classNames;
+	}
+	
+	private static void RestoreModifiedFileBackupIfExists( string originalPath)
+	{
+		string backupPath = originalPath + ModifiedFilesBackupExtension;
+		if( File.Exists( backupPath))
+		{
+			File.Copy( backupPath, originalPath, true);
+			File.Delete( backupPath);
+		}
+	}
+	
+	private static void BackupFileBeforeModification( string originalPath)
+	{
+		string backupPath = originalPath + ModifiedFilesBackupExtension;
+		File.Copy( originalPath, backupPath, true);
 	}
 }
