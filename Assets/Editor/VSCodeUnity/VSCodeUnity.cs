@@ -104,7 +104,7 @@ public class VSCodeUnity
 	private static void AddUnitySymbolsToVSC()
 	{
 		string cSharpDefPath = null;
-		string message = "";
+		string message = null;
 		
 		if( Application.platform == RuntimePlatform.OSXEditor)
 		{
@@ -117,7 +117,7 @@ public class VSCodeUnity
 		
 		if( cSharpDefPath == null)
 		{
-			message = "Couldn't find Visual Studio Code application or CSharpDef";
+			message = message ?? "Couldn't find Visual Studio Code application or CSharpDef";
 		}
 		else
 		{
