@@ -146,7 +146,7 @@ public class VSCodeUnity
 		}
 		else
 		{
-			message = "Adding Unity symbols to Visual Studio Code is not currently supported on " + Application.platform;
+			message = "Adding Unity shader plugin to Visual Studio Code is not currently supported on " + Application.platform;
 		}
 		
 		if( pluginInstallPath != null)
@@ -154,7 +154,7 @@ public class VSCodeUnity
 			message = "Installing to " + pluginInstallPath;
 		}
 		
-		EditorUtility.DisplayDialog( "Add Unity symbols", message, "Ok");
+		EditorUtility.DisplayDialog( "Add Unity shader plugin", message, "Ok");
 	}
 	
 	private static string FindCSharpDefPathOSX()
