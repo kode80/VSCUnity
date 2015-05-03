@@ -39,6 +39,8 @@ public class VSCodeUnity
 											 "# Visual Studio 2012";
 											 
 	private const string VSCCSharpDefPathOSX = "/Applications/Visual Studio Code.app/Contents/Resources/app/plugins/vs.language.csharp/csharpDef.js";
+	private const string VSCPluginsPathOSX = "/Applications/Visual Studio Code.app/Contents/Resources/app/plugins";
+	private const string UnityShaderPluginName = "vs.language.shader";
 	private const string ModifiedFilesBackupExtension = ".VSCModifiedOriginal"; 
 	
 	[MenuItem("VS Code/Update project for Visual Studio Code")]
@@ -127,6 +129,29 @@ public class VSCodeUnity
 			
 			message = success ? "Successfully added Unity symbols to Visual Studio Code" :
 								"Couldn't add Unity symbols to Visual Studio Code, couldn't find keywords array";
+		}
+		
+		EditorUtility.DisplayDialog( "Add Unity symbols", message, "Ok");
+	}
+	
+	[MenuItem("VS Code/Add Unity shader plugin to Visual Studio Code")]
+	private static void AddUnityShaderPluginToVSC()
+	{
+		string message = "";
+		string pluginInstallPath = null;
+		
+		if( Application.platform == RuntimePlatform.OSXEditor)
+		{
+			pluginInstallPath = VSCPluginsPathOSX + "/" + UnityShaderPluginName;
+		}
+		else
+		{
+			message = "Adding Unity symbols to Visual Studio Code is not currently supported on " + Application.platform;
+		}
+		
+		if( pluginInstallPath != null)
+		{
+			message = "Installing to " + pluginInstallPath;
 		}
 		
 		EditorUtility.DisplayDialog( "Add Unity symbols", message, "Ok");
