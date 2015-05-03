@@ -141,11 +141,13 @@ public class VSCodeUnity
 	[MenuItem("VS Code/Add Unity shader plugin to Visual Studio Code")]
 	private static void AddUnityShaderPluginToVSC()
 	{
-		string message = "";
+		string message = null;
+		string pluginSourcePath = null;
 		string pluginInstallPath = null;
 		
 		if( Application.platform == RuntimePlatform.OSXEditor)
 		{
+			pluginSourcePath = Application.dataPath + "/../VSCUnity/" + UnityShaderPluginName;
 			pluginInstallPath = VSCPluginsPathOSX + "/" + UnityShaderPluginName;
 		}
 		else
@@ -153,9 +155,24 @@ public class VSCodeUnity
 			message = "Adding Unity shader plugin to Visual Studio Code is not currently supported on " + Application.platform;
 		}
 		
-		if( pluginInstallPath != null)
+		bool supportedPlatform = message == null;
+		if( supportedPlatform)
 		{
-			message = "Installing to " + pluginInstallPath;
+			if( Directory.Exists( pluginSourcePath))
+			{	
+				if( Directory.Exists( pluginInstallPath))
+				{
+					Directory.Delete( pluginInstallPath, true);	
+				}
+				
+				CopyDirectory.Copy( pluginSourcePath, pluginInstallPath);
+				
+				message = "Successfully added Unity shader plugin to Visual Studio Code";
+			}
+			else
+			{
+				message = "Couldn't find the Unity shader plugin at " + pluginSourcePath;
+			}
 		}
 		
 		EditorUtility.DisplayDialog( "Add Unity shader plugin", message, "Ok");
