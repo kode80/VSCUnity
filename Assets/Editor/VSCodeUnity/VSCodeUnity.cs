@@ -115,20 +115,24 @@ public class VSCodeUnity
 			message = "Adding Unity symbols to Visual Studio Code is not currently supported on " + Application.platform;
 		}
 		
-		if( cSharpDefPath == null)
+		bool supportedPlatform = message == null;
+		if( supportedPlatform)
 		{
-			message = message ?? "Couldn't find Visual Studio Code application or CSharpDef";
-		}
-		else
-		{
-			RestoreModifiedFileBackupIfExists( cSharpDefPath);
-			BackupFileBeforeModification( cSharpDefPath);
-			
-			List<string> classNames = GetPublicClassesInNamespaces( "UnityEngine", "UnityEditor");
-			bool success = AddClassNamesToCSharpDef( classNames, cSharpDefPath);
-			
-			message = success ? "Successfully added Unity symbols to Visual Studio Code" :
-								"Couldn't add Unity symbols to Visual Studio Code, couldn't find keywords array";
+			if( cSharpDefPath == null)
+			{
+				message = "Couldn't find Visual Studio Code application or CSharpDef";
+			}
+			else
+			{
+				RestoreModifiedFileBackupIfExists( cSharpDefPath);
+				BackupFileBeforeModification( cSharpDefPath);
+				
+				List<string> classNames = GetPublicClassesInNamespaces( "UnityEngine", "UnityEditor");
+				bool success = AddClassNamesToCSharpDef( classNames, cSharpDefPath);
+				
+				message = success ? "Successfully added Unity symbols to Visual Studio Code" :
+									"Couldn't add Unity symbols to Visual Studio Code, couldn't find keywords array";
+			}
 		}
 		
 		EditorUtility.DisplayDialog( "Add Unity symbols", message, "Ok");
