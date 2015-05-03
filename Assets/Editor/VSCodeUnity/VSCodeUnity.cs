@@ -171,7 +171,7 @@ public class VSCodeUnity
 			}
 			else
 			{
-				message = "Couldn't find the Unity shader plugin at " + pluginSourcePath;
+				message = "Couldn't find the Unity shader plugin:\n\n" + pluginSourcePath;
 			}
 		}
 		
