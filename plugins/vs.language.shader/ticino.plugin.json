@@ -1,0 +1,19 @@
+{
+	"pluginId": "vs.language.shader",
+	"activationEvents": ["textModel:shader"],
+	"mainModule": "./shaderMain",
+	"contributes": {
+		"language": [{
+			"id": "shader",
+			"extensions": [ ".shader" ],
+			"aliases": [ "shader" ]
+		}]
+	},
+	"scripts": {
+		"compile": "node ../../node_modules/gulp/bin/gulp.js --gulpfile ../gulpfile.js compile --dir vs.language.shader"
+	},
+	"_testing": "./tests/shaderTests",
+	"_bundling": [
+		{ "name": "./shaderMain" }
+	]
+}
