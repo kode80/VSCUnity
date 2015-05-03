@@ -40,7 +40,8 @@ public class VSCodeUnity
 											 
 	private const string VSCCSharpDefPathOSX = "/Applications/Visual Studio Code.app/Contents/Resources/app/plugins/vs.language.csharp/csharpDef.js";
 	private const string VSCPluginsPathOSX = "/Applications/Visual Studio Code.app/Contents/Resources/app/plugins";
-	private const string UnityShaderPluginName = "vs.language.shader";
+	private const string UnityShaderSyntaxPluginName = "vs.language.shader";
+	private const string UnityShaderPluginName = "vs.language.shader.o";
 	private const string ModifiedFilesBackupExtension = ".VSCModifiedOriginal"; 
 	
 	[MenuItem("VS Code/Update project for Visual Studio Code")]
@@ -142,11 +143,15 @@ public class VSCodeUnity
 	private static void AddUnityShaderPluginToVSC()
 	{
 		string message = null;
+		string syntaxPluginSourcePath = null;
+		string syntaxPluginInstallPath = null;
 		string pluginSourcePath = null;
 		string pluginInstallPath = null;
 		
 		if( Application.platform == RuntimePlatform.OSXEditor)
 		{
+			syntaxPluginSourcePath = Application.dataPath + "/../VSCUnity/" + UnityShaderSyntaxPluginName;
+			syntaxPluginInstallPath = VSCPluginsPathOSX + "/" + UnityShaderSyntaxPluginName;
 			pluginSourcePath = Application.dataPath + "/../VSCUnity/" + UnityShaderPluginName;
 			pluginInstallPath = VSCPluginsPathOSX + "/" + UnityShaderPluginName;
 		}
@@ -158,6 +163,23 @@ public class VSCodeUnity
 		bool supportedPlatform = message == null;
 		if( supportedPlatform)
 		{
+			message = "";
+			if( Directory.Exists( syntaxPluginSourcePath))
+			{	
+				if( Directory.Exists( syntaxPluginInstallPath))
+				{
+					Directory.Delete( syntaxPluginInstallPath, true);	
+				}
+				
+				CopyDirectory.Copy( syntaxPluginSourcePath, syntaxPluginInstallPath);
+				
+				message += "Successfully added Unity shader syntax plugin to Visual Studio Code\n";
+			}
+			else
+			{
+				message += "Couldn't find the Unity shader syntax plugin:\n\n" + pluginSourcePath + "\n";
+			}
+			
 			if( Directory.Exists( pluginSourcePath))
 			{	
 				if( Directory.Exists( pluginInstallPath))
@@ -167,11 +189,11 @@ public class VSCodeUnity
 				
 				CopyDirectory.Copy( pluginSourcePath, pluginInstallPath);
 				
-				message = "Successfully added Unity shader plugin to Visual Studio Code";
+				message += "Successfully added Unity shader plugin to Visual Studio Code";
 			}
 			else
 			{
-				message = "Couldn't find the Unity shader plugin:\n\n" + pluginSourcePath;
+				message += "Couldn't find the Unity shader plugin:\n\n" + pluginSourcePath;
 			}
 		}
 		
