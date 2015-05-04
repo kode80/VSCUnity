@@ -3066,8 +3066,8 @@ define(["require", "exports", 'monaco' ], function (require, exports, monaco) {
 			"tex1D": {
 				codeSnippet: "tex1D",
 				label: "tex1D",
-				typeLabel: "tex1D",
-				documentationLabel: "",
+				typeLabel: "tex1D(sampler1D tex , float s )",
+				documentationLabel: "1D nonprojective texture query",
 				highlights: [],
 				type: "method"
 			},
@@ -3090,16 +3090,16 @@ define(["require", "exports", 'monaco' ], function (require, exports, monaco) {
 			"tex1Dproj": {
 				codeSnippet: "tex1Dproj",
 				label: "tex1Dproj",
-				typeLabel: "tex1Dproj",
-				documentationLabel: "",
+				typeLabel: "tex1Dproj(sampler1D tex , float2 sq )",
+				documentationLabel: "1D projective texture query",
 				highlights: [],
 				type: "method"
 			},
 			"tex2D": {
 				codeSnippet: "tex2D",
 				label: "tex2D",
-				typeLabel: "tex2D",
-				documentationLabel: "",
+				typeLabel: "tex2D(sampler2D tex , float2 s )",
+				documentationLabel: "2D nonprojective texture query",
 				highlights: [],
 				type: "method"
 			},
@@ -3122,16 +3122,16 @@ define(["require", "exports", 'monaco' ], function (require, exports, monaco) {
 			"tex2Dproj": {
 				codeSnippet: "tex2Dproj",
 				label: "tex2Dproj",
-				typeLabel: "tex2Dproj",
-				documentationLabel: "",
+				typeLabel: "tex2Dproj(sampler2D tex , float3 sq )",
+				documentationLabel: "2D projective texture query",
 				highlights: [],
 				type: "method"
 			},
 			"tex3D": {
 				codeSnippet: "tex3D",
 				label: "tex3D",
-				typeLabel: "tex3D",
-				documentationLabel: "",
+				typeLabel: "tex3D(sampler3D tex , float3 s )",
+				documentationLabel: "3D nonprojective texture query",
 				highlights: [],
 				type: "method"
 			},
@@ -3154,8 +3154,8 @@ define(["require", "exports", 'monaco' ], function (require, exports, monaco) {
 			"tex3Dproj": {
 				codeSnippet: "tex3Dproj",
 				label: "tex3Dproj",
-				typeLabel: "tex3Dproj",
-				documentationLabel: "",
+				typeLabel: "tex3Dproj(sampler3D tex , float4 sq )",
+				documentationLabel: "3D projective texture query",
 				highlights: [],
 				type: "method"
 			},
@@ -3178,16 +3178,16 @@ define(["require", "exports", 'monaco' ], function (require, exports, monaco) {
 			"texCUBEproj": {
 				codeSnippet: "texCUBEproj",
 				label: "texCUBEproj",
-				typeLabel: "texCUBEproj",
-				documentationLabel: "",
+				typeLabel: "texCUBEproj(samplerCUBE tex , float4 sq )",
+				documentationLabel: "Cube map projective texture query (ignores q)",
 				highlights: [],
 				type: "method"
 			},
 			"texRECT": {
 				codeSnippet: "texRECT",
 				label: "texRECT",
-				typeLabel: "texRECT",
-				documentationLabel: "",
+				typeLabel: "texRECT(samplerRECT tex , float2 s )",
+				documentationLabel: "2D nonprojective texture rectangle texture query (OpenGL only)",
 				highlights: [],
 				type: "method"
 			},
@@ -3210,8 +3210,8 @@ define(["require", "exports", 'monaco' ], function (require, exports, monaco) {
 			"texRECTproj": {
 				codeSnippet: "texRECTproj",
 				label: "texRECTproj",
-				typeLabel: "texRECTproj",
-				documentationLabel: "",
+				typeLabel: "texRECTproj(samplerRECT tex , float3 sq )",
+				documentationLabel: "2D texture rectangle projective texture query (OpenGL only)",
 				highlights: [],
 				type: "method"
 			},
