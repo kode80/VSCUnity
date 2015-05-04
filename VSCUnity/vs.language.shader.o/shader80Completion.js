@@ -1362,16 +1362,16 @@ define(["require", "exports", 'monaco' ], function (require, exports, monaco) {
 			"ddx": {
 				codeSnippet: "ddx",
 				label: "ddx",
-				typeLabel: "ddx",
-				documentationLabel: "",
+				typeLabel: "ddx( a )",
+				documentationLabel: "Approximate partial derivative of a with respect to screen-space x coordinate.",
 				highlights: [],
 				type: "method"
 			},
 			"ddy": {
 				codeSnippet: "ddy",
 				label: "ddy",
-				typeLabel: "ddy",
-				documentationLabel: "",
+				typeLabel: "ddy( a )",
+				documentationLabel: "Approximate partial derivative of a with respect to screen-space y coordinate.",
 				highlights: [],
 				type: "method"
 			},
