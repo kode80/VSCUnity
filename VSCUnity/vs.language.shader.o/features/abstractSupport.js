@@ -5,7 +5,7 @@
 'use strict';
 define(["require", "exports", 'monaco'], function (require, exports, monaco) {
     var AbstractSupport = (function () {
-        function AbstractSupport(ctx, server) {
+        function AbstractSupport(ctx) {
             this._modelService = ctx.modelService;
         }
         AbstractSupport.prototype.filename = function (resource) {
