@@ -1387,14 +1387,14 @@ define(["require", "exports", 'monaco' ], function (require, exports, monaco) {
 				codeSnippet: "discard",
 				label: "discard",
 				typeLabel: "discard",
-				documentationLabel: "",
+				documentationLabel: "Euclidean distance between points pt1 and pt2 .",
 				highlights: [],
 				type: "method"
 			},
 			"distance": {
 				codeSnippet: "distance",
 				label: "distance",
-				typeLabel: "distance",
+				typeLabel: "distance( pt1 , pt2 )",
 				documentationLabel: "",
 				highlights: [],
 				type: "method"
@@ -2610,8 +2610,8 @@ define(["require", "exports", 'monaco' ], function (require, exports, monaco) {
 			"length": {
 				codeSnippet: "length",
 				label: "length",
-				typeLabel: "length",
-				documentationLabel: "",
+				typeLabel: "length( v )",
+				documentationLabel: "Euclidean length of a vector.",
 				highlights: [],
 				type: "method"
 			},
@@ -2706,8 +2706,8 @@ define(["require", "exports", 'monaco' ], function (require, exports, monaco) {
 			"normalize": {
 				codeSnippet: "normalize",
 				label: "normalize",
-				typeLabel: "normalize",
-				documentationLabel: "",
+				typeLabel: "normalize( v )",
+				documentationLabel: "Returns a vector of length 1 that points in the same direction as vector v .",
 				highlights: [],
 				type: "method"
 			},
@@ -2826,8 +2826,8 @@ define(["require", "exports", 'monaco' ], function (require, exports, monaco) {
 			"reflect": {
 				codeSnippet: "reflect",
 				label: "reflect",
-				typeLabel: "reflect",
-				documentationLabel: "",
+				typeLabel: "reflect( I , N )",
+				documentationLabel: "Computes reflection vector from entering ray direction I and surface normal N .\n\nValid only for three-component vectors.",
 				highlights: [],
 				type: "method"
 			},
@@ -2842,8 +2842,8 @@ define(["require", "exports", 'monaco' ], function (require, exports, monaco) {
 			"refract": {
 				codeSnippet: "refract",
 				label: "refract",
-				typeLabel: "refract",
-				documentationLabel: "",
+				typeLabel: "refract( I , N , eta )",
+				documentationLabel: "Given entering ray direction I , surface normal N , and relative index of refraction eta , computes refraction vector.\n\nIf the angle between I and N is too large for a given eta , returns (0, 0, 0).\n\nValid only for three-component vectors.",
 				highlights: [],
 				type: "method"
 			},
