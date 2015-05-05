@@ -37,9 +37,17 @@ public class VSCodeUnity
 	
 	private const string VS12VersionString = "\r\nMicrosoft Visual Studio Solution File, Format Version 12.00\r\n" +
 											 "# Visual Studio 2012";
-											 
+	
+	//OSX 										 
 	private const string VSCCSharpDefPathOSX = "/Applications/Visual Studio Code.app/Contents/Resources/app/plugins/vs.language.csharp/csharpDef.js";
 	private const string VSCPluginsPathOSX = "/Applications/Visual Studio Code.app/Contents/Resources/app/plugins";
+	
+	//Win 
+	private readonly static string winUser = Environment.UserName;
+	private readonly static string VSCCSharpDefPathWin = "\\Users\\" + winUser + "\\AppData\\Local\\Code\\app-0.1.0\\resources\\app\\plugins\\vs.language.csharp\\csharpDef.js";
+	private readonly static string VSCPluginsPathWin = "\\Users\\" + winUser + "\\AppData\\Local\\Code\\app-0.1.0\\resources\\app\\plugins\\";
+	
+	
 	private const string UnityShaderPluginName = "vs.language.shader";
 	private const string ModifiedFilesBackupExtension = ".VSCModifiedOriginal"; 
 	
@@ -110,6 +118,10 @@ public class VSCodeUnity
 		{
 			cSharpDefPath = FindCSharpDefPathOSX();
 		}
+		else if (Application.platform == RuntimePlatform.WindowsEditor)
+		{
+			cSharpDefPath = FindCSharpDefPathWin();
+		}
 		else
 		{
 			message = "Adding Unity symbols to Visual Studio Code is not currently supported on " + Application.platform;
@@ -145,10 +157,18 @@ public class VSCodeUnity
 		string pluginSourcePath = null;
 		string pluginInstallPath = null;
 		
+		//OSX
 		if( Application.platform == RuntimePlatform.OSXEditor)
 		{
 			pluginSourcePath = Application.dataPath + "/../VSCUnity/" + UnityShaderPluginName;
 			pluginInstallPath = VSCPluginsPathOSX + "/" + UnityShaderPluginName;
+		}
+		
+		//Win
+		else if( Application.platform == RuntimePlatform.WindowsEditor)
+		{
+			pluginSourcePath = Application.dataPath + "\\..\\VSCUnity\\" + UnityShaderPluginName;
+			pluginInstallPath = VSCPluginsPathWin + "\\" + UnityShaderPluginName;
 		}
 		else
 		{
@@ -178,6 +198,7 @@ public class VSCodeUnity
 		EditorUtility.DisplayDialog( "Add Unity shader plugin", message, "Ok");
 	}
 	
+	//OSX
 	private static string FindCSharpDefPathOSX()
 	{
 		if( File.Exists( VSCCSharpDefPathOSX))
@@ -188,6 +209,27 @@ public class VSCodeUnity
 		{
 			string userPath = Environment.GetFolderPath( Environment.SpecialFolder.Personal);
 			string cSharpDefUserPath = userPath + VSCCSharpDefPathOSX;
+			
+			if( File.Exists( cSharpDefUserPath))
+			{
+				return cSharpDefUserPath;
+			}
+		}
+		
+		return null;
+	}
+	
+	//Win
+	private static string FindCSharpDefPathWin()
+	{
+		if( File.Exists( VSCCSharpDefPathWin))
+		{
+			return VSCCSharpDefPathWin;
+		}
+		else 
+		{
+			string userPath = Environment.GetFolderPath( Environment.SpecialFolder.Personal);
+			string cSharpDefUserPath = userPath + VSCCSharpDefPathWin;
 			
 			if( File.Exists( cSharpDefUserPath))
 			{
