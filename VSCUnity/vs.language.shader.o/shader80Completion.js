@@ -4,23 +4,75 @@ define(["require", "exports", 'monaco' ], function (require, exports, monaco) {
 	{
 		function Shader80Completion() 
 		{
-			var completionsValues = new Array();
+			var tree = new Object();
 
 			for( var key in completions)
 			{
-				completionsValues.push( completions[ key]);
+				this.AddWordToTree( tree, key);
 			}
 
-			this.completions = completionsValues;
+			this.completions = completions;
+			this.tree = tree;
 		}
 
-		Shader80Completion.prototype.CompletionsForString = function( word)
+		Shader80Completion.prototype.CompletionsForString = function( str)
 		{
+			var words = this.GetWordsFromTree( this.tree, str);
+			var completions = new Array();
+
+			for( var i=0; i<words.length; i++)
+			{
+				completions.push( this.completions[ words[ i]]);
+			}
+
 			return [{
-	                currentWord: word,
-	                suggestions: this.completions
+	                currentWord: str,
+	                suggestions: completions
 	            	}];
 		};
+
+		Shader80Completion.prototype.AddWordToTree = function( tree, word)
+		{
+			var currentLettersObj = tree;
+			var letter;
+
+			for( var i=0; i<word.length; i++)
+			{
+				letter = word.charAt( i);
+
+				if( typeof currentLettersObj[ letter] === "undefined")
+				{
+					currentLettersObj[ letter] = new Object();
+					currentLettersObj[ letter].lettersObj = new Object();
+					currentLettersObj[ letter].words = new Array();
+				}
+
+				currentLettersObj[ letter].words.push( word);
+				currentLettersObj = currentLettersObj[ letter].lettersObj;
+			}
+		}
+
+		Shader80Completion.prototype.GetWordsFromTree = function( tree, word)
+		{
+			var currentLettersObj = tree;
+			var letter;
+			var words;
+
+			for( var i=0; i<word.length; i++)
+			{
+				letter = word.charAt( i);
+
+				if( typeof currentLettersObj[ letter] === "undefined")
+				{
+					return [];
+				}
+
+				words = currentLettersObj[ letter].words;
+				currentLettersObj = currentLettersObj[ letter].lettersObj;
+			}
+
+			return words;
+		}
 
 		var completions = {
 			"ATTR0": {
