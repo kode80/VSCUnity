@@ -1,8 +1,12 @@
 {
 	"pluginId": "vs.language.shader.shader80",
 	"activationEvents": ["textModel:shader"],
-	"mainModule": "./shader80Main",
+	"mainModule": "./out/shader80Main",
+	"dependencies": [
+		// Load the basic plugin first, to be able to overwrite some supports
+		"vs.language.shader"
+	],
 	"scripts": {
-		"compile": "node ../../node_modules/gulp/bin/gulp.js --gulpfile ../gulpfile.js compile --dir vs.language.shader.o"
+		"compile": "node ../../node_modules/gulp/bin/gulp.js --gulpfile ../../gulpfile.plugins.js compile-plugin:vs.language.shader.o"
 	}
 }

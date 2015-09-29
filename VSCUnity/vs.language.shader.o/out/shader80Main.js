@@ -1,7 +1,6 @@
 /*---------------------------------------------------------
  * Copyright (C) Microsoft Corporation. All rights reserved.
  *--------------------------------------------------------*/
-/// <reference path="../declares.d.ts" />
 'use strict';
 define(["require", "exports", 'monaco', './features/suggestSupport', './shader80'], function (require, exports, monaco, SuggestSupport, shader80) {
     function activate(_ctx) {
@@ -19,3 +18,4 @@ define(["require", "exports", 'monaco', './features/suggestSupport', './shader80
 
     exports.activate = activate;
 });
+//# sourceMappingURL=shader80Main.js.map

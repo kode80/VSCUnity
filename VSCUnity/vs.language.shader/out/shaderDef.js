@@ -2,7 +2,6 @@
  * Copyright (C) Microsoft Corporation. All rights reserved.
  *--------------------------------------------------------*/
  // Cpp language plugin modified by Ben Hopkins (kode80) for Unity shader support 
-/// <reference path="../declares.d.ts" />
 'use strict';
 define(["require", "exports"], function (require, exports) {
     exports.language = {

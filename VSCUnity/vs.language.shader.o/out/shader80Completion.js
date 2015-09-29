@@ -3744,3 +3744,4 @@ define(["require", "exports", 'monaco' ], function (require, exports, monaco) {
 	})();
 	return Shader80Completion;
 });
+//# sourceMappingURL=shader80Completion.js.map

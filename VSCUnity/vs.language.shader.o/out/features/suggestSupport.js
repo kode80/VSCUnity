@@ -1,7 +1,6 @@
 /*---------------------------------------------------------
  * Copyright (C) Microsoft Corporation. All rights reserved.
  *--------------------------------------------------------*/
-/// <reference path="../../declares.d.ts" />
 'use strict';
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -35,3 +34,4 @@ define(["require", "exports", 'vs/nls', 'vs/base/collections', './abstractSuppor
 
     return SuggestSupport;
 });
+//# sourceMappingURL=suggestSupport.js.map

@@ -1,7 +1,6 @@
 /*---------------------------------------------------------
  * Copyright (C) Microsoft Corporation. All rights reserved.
  *--------------------------------------------------------*/
-/// <reference path="../../declares.d.ts" />
 'use strict';
 define(["require", "exports", '../cppDef', 'monaco-testing'], function (require, exports, languageDef, T) {
     var tokenizationSupport = T.createTokenizationSupport(languageDef.language);
@@ -626,3 +625,4 @@ define(["require", "exports", '../cppDef', 'monaco-testing'], function (require,
         ]);
     });
 });
+//# sourceMappingURL=shaderTests.js.map

@@ -1,7 +1,7 @@
 {
 	"pluginId": "vs.language.shader",
 	"activationEvents": ["textModel:shader"],
-	"mainModule": "./shaderMain",
+	"mainModule": "./out/shaderMain",
 	"contributes": {
 		"language": [{
 			"id": "shader",
@@ -10,10 +10,9 @@
 		}]
 	},
 	"scripts": {
-		"compile": "node ../../node_modules/gulp/bin/gulp.js --gulpfile ../gulpfile.js compile --dir vs.language.shader"
+		"compile": "node ../../node_modules/gulp/bin/gulp.js --gulpfile ../../gulpfile.plugins.js compile-plugin:vs.language.shader"
 	},
-	"_testing": "./tests/shaderTests",
 	"_bundling": [
-		{ "name": "./shaderMain" }
+		{ "name": "./out/shaderMain" }
 	]
 }

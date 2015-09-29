@@ -1,7 +1,6 @@
 /*---------------------------------------------------------
  * Copyright (C) Microsoft Corporation. All rights reserved.
  *--------------------------------------------------------*/
-/// <reference path="../../declares.d.ts" />
 'use strict';
 define(["require", "exports", 'monaco'], function (require, exports, monaco) {
     var AbstractSupport = (function () {
@@ -27,3 +26,4 @@ define(["require", "exports", 'monaco'], function (require, exports, monaco) {
     })();
     return AbstractSupport;
 });
+//# sourceMappingURL=abstractSupport.js.map
