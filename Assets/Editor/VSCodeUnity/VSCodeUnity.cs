@@ -47,8 +47,7 @@ public class VSCodeUnity
 	private readonly static string VSCCSharpDefPathWin = "\\Users\\" + winUser + "\\AppData\\Local\\Code\\app-0.1.0\\resources\\app\\plugins\\vs.language.csharp\\csharpDef.js";
 	private readonly static string VSCPluginsPathWin = "\\Users\\" + winUser + "\\AppData\\Local\\Code\\app-0.1.0\\resources\\app\\plugins\\";
 	
-	
-	private const string UnityShaderPluginName = "vs.language.shader";
+
 	private const string UnityShaderSyntaxPluginName = "vs.language.shader";
 	private const string UnityShaderPluginName = "vs.language.shader.o";
 	private const string ModifiedFilesBackupExtension = ".VSCModifiedOriginal"; 
