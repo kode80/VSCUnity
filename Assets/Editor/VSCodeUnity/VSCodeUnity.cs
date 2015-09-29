@@ -39,12 +39,12 @@ public class VSCodeUnity
 											 "# Visual Studio 2012";
 	
 	//OSX 										 
-	private const string VSCCSharpDefPathOSX = "/Applications/Visual Studio Code.app/Contents/Resources/app/plugins/vs.language.csharp/csharpDef.js";
+	private const string VSCCSharpDefPathOSX = "/Applications/Visual Studio Code.app/Contents/Resources/app/plugins/vs.language.csharp/out/csharpDef.js";
 	private const string VSCPluginsPathOSX = "/Applications/Visual Studio Code.app/Contents/Resources/app/plugins";
 	
 	//Win 
 	private readonly static string winUser = Environment.UserName;
-	private readonly static string VSCCSharpDefPathWin = "\\Users\\" + winUser + "\\AppData\\Local\\Code\\app-0.1.0\\resources\\app\\plugins\\vs.language.csharp\\csharpDef.js";
+	private readonly static string VSCCSharpDefPathWin = "\\Users\\" + winUser + "\\AppData\\Local\\Code\\app-0.1.0\\resources\\app\\plugins\\vs.language.csharp\\out\\csharpDef.js";
 	private readonly static string VSCPluginsPathWin = "\\Users\\" + winUser + "\\AppData\\Local\\Code\\app-0.1.0\\resources\\app\\plugins\\";
 	
 
